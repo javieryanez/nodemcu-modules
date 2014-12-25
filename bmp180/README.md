@@ -11,5 +11,4 @@ init(sda, scl)
 **Parameters:**
 
 sda - SDA pin
-
 sca - SCL pin
