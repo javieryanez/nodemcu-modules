@@ -15,9 +15,8 @@ Initialize module. Initializacion is mandatory before read values.
 * sca - SCL pin
 
 ### read
-read(oss)
+read(oss)  
 Read temperature and pressure from BMP180.
 
-**Parameters:**
-
+**Parameters:**  
 * oss - oversampling setting. 0: ultra low power, 1: standard, 2: high resolutuion,3: ultra high resolution.
