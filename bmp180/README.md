@@ -22,8 +22,8 @@ Read temperature and pressure from BMP180.
 * oss - oversampling setting. 0: ultra low power, 1: standard, 2: high resolution,3: ultra high resolution.
 
 ###getTemperature
-getTemperature()
-Return the temperature of the last temperature reading.
+getTemperature()  
+Returns the temperature of the last temperature reading.
 
 **Returns:**  
 * last temperature reading in 0.1ºC
