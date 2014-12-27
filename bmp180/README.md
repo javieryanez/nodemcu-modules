@@ -26,4 +26,4 @@ getTemperature()
 Return the temperature of the last temperature reading.
 
 **Returns:**  
-*last temperature reading in 0.1ºC
+* last temperature reading in 0.1ºC
