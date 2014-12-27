@@ -25,5 +25,5 @@ Read temperature and pressure from BMP180.
 getTemperature()
 Return the temperature of the last temperature reading.
 
-**Returns:**
+**Returns:**  
 *last temperature reading in 0.1ºC
