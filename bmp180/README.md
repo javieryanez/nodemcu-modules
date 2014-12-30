@@ -49,3 +49,10 @@ Returns the temperature of the last temperature reading.
 
 **Returns:**  
 * last temperature reading in 0.1ºC
+
+###getPressure
+getPressure()  
+Returns the pressure of the last pressure reading.
+
+**Returns:**  
+* last pressure reading in bars
