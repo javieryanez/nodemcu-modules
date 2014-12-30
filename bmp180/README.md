@@ -26,9 +26,6 @@ print("Pressure: "..(p * 75 / 10000).."."..((p * 75 % 10000) / 1000).." mmHg")
 bmp180 = nil
 package.loaded["bmp180"]=nil
 ```
-
-bmp180 = require("bmp180")
-
 ## Functions
 ### init
 init(sda, scl)  
