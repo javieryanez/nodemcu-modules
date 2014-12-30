@@ -12,7 +12,7 @@ Initialize module. Initializacion is mandatory before read values.
 **Parameters:**
 
 * sda - SDA pin  
-* sca - SCL pin
+* scl - SCL pin
 
 ### read
 read(oss)  
