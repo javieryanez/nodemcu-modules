@@ -3,8 +3,8 @@
 ## Example  
 ```lua
 OSS = 1 -- oversampling setting (0-3)
-SDA_PIN = 9 -- sda pin, GPIO2
-SCL_PIN = 8 -- scl pin, GPIO0
+SDA_PIN = 4 -- sda pin, GPIO2
+SCL_PIN = 3 -- scl pin, GPIO0
 
 bmp180 = require("bmp180")
 bmp180.init(SDA_PIN, SCL_PIN)
