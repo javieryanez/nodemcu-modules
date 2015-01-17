@@ -11,40 +11,46 @@ local moduleName = ...
 local M = {}
 _G[moduleName] = M
 
-local humidity = 0
-local temperature = 0
-local checksum = 0
-local checksumTest = 0
+local humidity
+local temperature
+local checksum
+local checksumTest
 
-local function tryRead(pin)
+function M.read(pin)
+  humidity = 0
+  temperature = 0
+  checksum = 0
+
+  -- Use Markus Gritsch trick to speed up read/write on GPIO
+  gpio_read = gpio.read
+  gpio_write = gpio.write
+  
   bitStream = {}
   for j = 1, 40, 1 do
     bitStream[j] = 0
   end
   bitlength = 0
 
+  -- Step 1:  send out start signal to DHT22
   gpio.mode(pin, gpio.OUTPUT)
+  gpio.write(pin, gpio.HIGH)
+  tmr.delay(100)
   gpio.write(pin, gpio.LOW)
   tmr.delay(20000)
-  -- Use Markus Gritsch trick to speed up read/write on GPIO
-  gpio_read = gpio.read
-  gpio_write = gpio.write
-
+  gpio.write(pin, gpio.HIGH)
   gpio.mode(pin, gpio.INPUT)
 
+  -- Step 2:  DHT22 send response signal 
   -- bus will always let up eventually, don't bother with timeout
   while (gpio_read(pin) == 0 ) do end
-
+  c=0
+  while (gpio_read(pin) == 1 and c < 100) do c = c + 1 end
+  -- bus will always let up eventually, don't bother with timeout
+  while (gpio_read(pin) == 0 ) do end
   c=0
   while (gpio_read(pin) == 1 and c < 100) do c = c + 1 end
 
-  -- bus will always let up eventually, don't bother with timeout
-  while (gpio_read(pin) == 0 ) do end
-
-  c=0
-  while (gpio_read(pin) == 1 and c < 100) do c = c + 1 end
-
-  -- acquisition loop
+  -- Step 3: DHT22 send data
   for j = 1, 40, 1 do
     while (gpio_read(pin) == 1 and bitlength < 10 ) do
       bitlength = bitlength + 1
@@ -73,18 +79,14 @@ local function tryRead(pin)
   end
 
   checksumTest=((humidity / 256) + (humidity % 256) + (temperature / 256) + (temperature % 256)) % 256
-end
 
-function M.read(pin)
-  attempts = 0
-  checksumTest = -1
-  while attempts < 3 and checksum ~= checksumTest do
-     tryRead(pin)
-     attempts = attempts + 1
+  if temperature > 0x8000 then
+    -- convert to negative format
+    temperature = -(temperature - 0x8000)
   end
-  if attempts > 3 then
-    humidity = 0
-    temperature = 0
+
+  if checksum ~= checksumTest then
+    humidity = -1
   end
 end
 
