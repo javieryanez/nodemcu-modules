@@ -1,5 +1,8 @@
 # DHT22 module
 
+This module is compatible with DHT22 and DHT21.  
+No need to use a resistor to connect the pin data of DHT22 to ESP8266.
+
 ## Example  
 ```lua
 PIN = 4 --  data pin, GPIO2
@@ -20,3 +23,26 @@ print("Humidity: "..(h/10).."."..(h%10).."%")
 dht22 = nil
 package.loaded["dht22"]=nil
 ```
+## Functions
+### read
+read(pin) 
+Read humidity and temperature from DHT22.
+
+**Parameters:**
+
+* pin - ESP8266 pin connect to data pin in DHT22
+
+### getHumidity
+getHumidity()  
+Returns the humidity of the last reading.
+
+**Returns:**  
+* last humidity reading in per thousand
+
+### getTemperature
+getTemperature()  
+Returns the temperature of the last reading.
+
+**Returns:**  
+* last temperature reading in 0.1ºC
+
