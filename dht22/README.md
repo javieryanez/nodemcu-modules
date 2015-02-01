@@ -12,15 +12,20 @@ dht22.read(PIN)
 t = dht22.getTemperature()
 h = dht22.getHumidity()
 
-if h == -1 then
+if h == nil then
   print("Error reading from DHT22")
 else
   -- temperature in degrees Celsius  and Farenheit
-  print("Temperature: "..(t / 10).."."..(t % 10).." deg C")
+  -- floating point and integer version:
+  print("Temperature: "..((t-(t % 10)) / 10).."."..(t % 10).." deg C")
+  -- only integer version:
   print("Temperature: "..(9 * t / 50 + 32).."."..(9 * t / 5 % 10).." deg F")
-
+  -- only float point version:
+  print("Temperature: "..(9 * t / 50 + 32).." deg F")
+  
   -- humidity
-  print("Humidity: "..(h/10).."."..(h%10).."%")
+  -- floating point and integer version
+  print("Humidity: "..((h - (h % 10)) / 10).."."..(h % 10).."%")
 end
 
 -- release module
@@ -29,7 +34,7 @@ package.loaded["dht22"]=nil
 ```
 ## Functions
 ### read
-read(pin) 
+read(pin)  
 Read humidity and temperature from DHT22.
 
 **Parameters:**
