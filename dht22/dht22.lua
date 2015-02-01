@@ -85,8 +85,6 @@ function M.read(pin)
     temperature = -(temperature - 0x8000)
   end
 
-  print(checksum)
-  print(checksumTest)
   -- conditions compatible con float point and integer
   if (checksumTest - checksum >= 1) or (checksum - checksumTest >= 1) then
     humidity = nil
