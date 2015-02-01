@@ -1,6 +1,6 @@
 # DHT22 module
 
-This module is compatible with DHT22 and DHT21.  
+This module is compatible with DHT22 and DHT21. Supports nodemcu with or without floating point.
 No need to use a resistor to connect the pin data of DHT22 to ESP8266.
 
 ## Example  
