@@ -11,7 +11,7 @@ local l={}for e=1,40,1 do
 l[e]=0
 end
 local a=0
-gpio.mode(e,gpio.OUTPUT)gpio.write(e,gpio.HIGH)tmr.delay(100)gpio.write(e,gpio.LOW)tmr.delay(2e4)gpio.write(e,gpio.HIGH)gpio.mode(e,gpio.INPUT)while(i(e)==0)do end
+gpio.mode(e,gpio.OUTPUT)gpio.write(e,gpio.HIGH)tmr.delay(100)gpio.write(e,gpio.LOW)tmr.delay(40)gpio.mode(e,gpio.INPUT)while(i(e)==0)do end
 local n=0
 while(i(e)==1 and n<500)do n=n+1 end
 while(i(e)==0)do end
@@ -42,6 +42,7 @@ d=-(d-32768)end
 if(t-r>=1)or(r-t>=1)then
 o=nil
 end
+gpio.mode(e,gpio.OUTPUT)gpio.write(e,gpio.HIGH)
 end
 function a.getTemperature()return d
 end
