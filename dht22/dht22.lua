@@ -33,10 +33,12 @@ function M.read(pin)
   -- Step 1:  send out start signal to DHT22
   gpio.mode(pin, gpio.OUTPUT)
   gpio.write(pin, gpio.HIGH)
-  tmr.delay(100)
+  tmr.delay(150)
   gpio.write(pin, gpio.LOW)
-  tmr.delay(20000)
-  gpio.write(pin, gpio.HIGH)
+  --tmr.delay(20000)
+  tmr.delay(40)
+  --delayMicroseconds(40)
+  --gpio.write(pin, gpio.HIGH)
   gpio.mode(pin, gpio.INPUT)
 
   -- Step 2:  DHT22 send response signal 
@@ -89,6 +91,9 @@ function M.read(pin)
   if (checksumTest - checksum >= 1) or (checksum - checksumTest >= 1) then
     humidity = nil
   end
+  --Per DHT Arduino Lib
+  gpio.mode(pin, gpio.OUTPUT)
+  gpio.write(pin, gpio.HIGH)
 end
 
 function M.getTemperature()
